@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Custom Context Menu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="CustomSyntax.css" />
+</head>
+
+<body>
+  <div class="container" oncontextmenu="return showContextMenu(event)">
+    <h2>Right Click & Explore the Magic!</h2>
+  </div>
+  <div id="pulse"></div>
+  <div id="contextMenu">
+    <ul>
+      <li>
+        <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+        <div class="name">Open</div>
+      </li>
+      <li>
+        <i></i>
+        <div class="name">Open in new tab</div>
+      </li>
+      <div class="break"></div>
+      <li>
+        <i class="fa fa-scissors" aria-hidden="true"></i>
+        <div class="name">Cut</div>
+      </li>
+      <li>
+        <i class="fa fa-clone" aria-hidden="true"></i>
+        <div class="name">Copy</div>
+      </li>
+      <li>
+        <i class="fa fa-clipboard" aria-hidden="true"></i>
+        <div class="name">Paste</div>
+      </li>
+      <div class="break"></div>
+      <li>
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        <div class="name">Reload</div>
+      </li>
+      <li>
+        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+        <div class="name">Print</div>
+      </li>
+    </ul>
+  </div>
+  <script src="script.js"></script>
+</body>
+<script>
+  window.addEventListener('click', function (e) {
+    var menu = document.getElementById('contextMenu');
+    menu.classList.remove('visible');
+  });
+  function showContextMenu(e) {
+    var pulse = document.getElementById('pulse');
+    var menu = document.getElementById('contextMenu');
+    if (e.clientX > window.innerWidth - 220) {
+      menu.style.left = (e.clientX - 220) + 'px';
+      menu.style.transformOrigin = 'top right';
+    } else {
+      menu.style.left = e.clientX + 'px';
+    }
+    pulse.style.left = e.clientX - 10 + 'px';
+    menu.style.top = e.clientY + 'px';
+    pulse.style.top = (e.clientY - 10) + 'px';
+    pulse.classList.add('active');
+    setTimeout(function () {
+      document.getElementById('pulse').classList.remove('active');
+    }, 300);
+    document.getElementById('contextMenu')
+    menu.classList.add('visible');
+    menu.style.transformOrigin = 'top left';
+    return false;
+  }
+</script>
+
+</html>
