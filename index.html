@@ -54,6 +54,16 @@
     var menu = document.getElementById('contextMenu');
     menu.classList.remove('visible');
   });
+
+  window.addEventListener('dblclick', function (e) {
+    e.preventDefault();
+    showContextMenu(e);
+  });
+
+  window.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
   function showContextMenu(e) {
     var pulse = document.getElementById('pulse');
     var menu = document.getElementById('contextMenu');
@@ -70,7 +80,6 @@
     setTimeout(function () {
       document.getElementById('pulse').classList.remove('active');
     }, 300);
-    document.getElementById('contextMenu')
     menu.classList.add('visible');
     menu.style.transformOrigin = 'top left';
     return false;
